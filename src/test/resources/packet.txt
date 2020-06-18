@@ -1,0 +1,52 @@
+{
+  "requestNo":"11809267147370132563",
+  "requestTime":"20161205102651",
+  "channelCode":"BNB_XXX",
+  "version":"1.0.0",
+  "tranCode":"creditApply",
+  "productCode":"20190315000001",
+  "requestData":{
+	"applyNo": "11809267147370132563",
+	"email": "email@example.org",
+	"applyTime": "20181204164355",
+	"applyProduct": "1100022000",
+	"applyAmount": "10000.00",
+	"applyPeriod": "1",
+	"notifyUrl": "http://www.axnjf.com/ningbo/financing/allow/ningbo/checkApplyResult.do",
+	"customerName": "王五",
+	"customerTel": "18510137753",
+	"certType": "Ind01",
+	"certNo": "330726197912162724",
+	"certValidDeadline": "20300307",
+	"certAddress": "河北省邢台市任县辛店镇人民西路24号",
+	"cardNo": "6217710204701833",
+	"homeAddressProvince": "河北",
+	"homeAddressCity": "邢台市",
+	"homeAddressArea": "任县",
+	"homeAddressCountryCode": "0501001101",
+	"homeAddressDetail": "",
+	"workAddressProvince": "河北",
+	"workAddressCity": "邢台市",
+	"workAddressArea": "任县",
+	"workAddressCountryCode": "0501001101",
+	"workAddressDetail": "",
+	"unitName": "",
+	"unitTel": "",
+	"education": "010",
+	"school": "东华大学",
+	"monthlyIncome": "20000.00",
+	"workType": "A",
+	"emergList": [{
+		"emergName": "张三",
+		"emergRelation": "01",
+		"emergTel": "13800001111"
+	}, {
+		"emergName": "李四",
+		"emergRelation": "02",
+		"emergTel": "13800001111"
+	}],
+	" compareScoreList": [{
+		" compareType ": "01",
+		" compareScoew ": "60"
+	}]
+}}
