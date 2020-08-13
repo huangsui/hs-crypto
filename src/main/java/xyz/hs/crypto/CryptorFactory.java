@@ -14,16 +14,16 @@ import java.security.PublicKey;
  * @author huangsui
  * Created on 2019/9/4
  */
-public class CryptoFactory {
+public class CryptorFactory {
 
-    public static Crypto create(String cerResPath, String pfxResPath, String pfxPass){
+    public static SimpleCryptor create(String cerResPath, String pfxResPath, String pfxPass){
         PrivateKeyManager privateKeyManager = new PrivateKeyManager(pfxResPath, pfxPass);
         PublicKeyManager publicKeyManager = new PublicKeyManager(cerResPath);
-        return CryptoFactory.create(privateKeyManager.getPrivateKey(), publicKeyManager.getPublicKey());
+        return CryptorFactory.create(privateKeyManager.getPrivateKey(), publicKeyManager.getPublicKey());
     }
 
-    public static Crypto create(PrivateKey privateKey, PublicKey publicKey){
-        Crypto crypto = new Crypto();
+    public static SimpleCryptor create(PrivateKey privateKey, PublicKey publicKey){
+        SimpleCryptor crypto = new SimpleCryptor();
 
         //aes加密
         AesCipher aes = new AesCipher();

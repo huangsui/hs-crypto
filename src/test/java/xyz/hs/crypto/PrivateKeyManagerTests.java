@@ -16,7 +16,7 @@ public class PrivateKeyManagerTests {
     @Test
     public void test(){
         PfxCert pfxCertificate = new PfxCert();
-        pfxCertificate.setResPath("/test.pfx");
+        pfxCertificate.setResPath("/cert/b.pfx");
         pfxCertificate.setStorePass("1234");
         PrivateKeyManager privateKeyProvider = new PrivateKeyManager(pfxCertificate, "1234");
         PrivateKey privateKey = privateKeyProvider.getPrivateKey();

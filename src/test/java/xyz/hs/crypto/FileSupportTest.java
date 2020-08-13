@@ -10,10 +10,10 @@ import java.net.URL;
  * @Date: 2019/6/21 20:32
  * @Description:
  */
-public class TestFileSupport {
+public class FileSupportTest {
 
     public static String getFilePath(String path){
-        URL url = TestFileSupport.class.getResource(path);
+        URL url = FileSupportTest.class.getResource(path);
         return url.getFile();
     }
 

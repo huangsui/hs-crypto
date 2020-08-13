@@ -26,10 +26,10 @@ public class RsaCipherTests {
         String content = "Input length must be multiple of 16 when decrypting with padded cipher";
 
         CerCert cerCert = new CerCert();
-        cerCert.setResPath("/test.cer");
+        cerCert.setResPath("/cert/b.cer");
 
         PfxCert pfxCert = new PfxCert();
-        pfxCert.setResPath("/test.pfx");
+        pfxCert.setResPath("/cert/b.pfx");
         pfxCert.setStorePass("1234");
 
         PrivateKeyManager privateKeyManager = new PrivateKeyManager(pfxCert, "1234");

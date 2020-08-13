@@ -16,7 +16,7 @@ public class PublicKeyManagerTests {
     @Test
     public void test(){
         CerCert cerCert = new CerCert();
-        cerCert.setResPath("/test.cer");
+        cerCert.setResPath("/cert/b.cer");
         PublicKeyManager publicKeyProvider = new PublicKeyManager(cerCert);
         PublicKey publicKey = publicKeyProvider.getPublicKey();
         String publicKeyBase64 = BaseEncoding.base64().encode(publicKey.getEncoded());

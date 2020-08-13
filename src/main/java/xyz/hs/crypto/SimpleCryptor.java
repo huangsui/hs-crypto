@@ -3,8 +3,8 @@ package xyz.hs.crypto;
 import xyz.hs.crypto.cipher.AesCipher;
 import xyz.hs.crypto.cipher.RsaCipher;
 import xyz.hs.crypto.common.Constant;
-import xyz.hs.crypto.msg.Packet;
-import xyz.hs.crypto.msg.PacketSerializer;
+import xyz.hs.crypto.msg.Message;
+import xyz.hs.crypto.msg.MessageFormat;
 import xyz.hs.crypto.sign.Verifier;
 import xyz.hs.crypto.sign.Signer;
 
@@ -12,7 +12,7 @@ import xyz.hs.crypto.sign.Signer;
  * @author huangsui
  * Created on 2019/8/23
  */
-public class Crypto {
+public class SimpleCryptor {
 
     private Signer signer;
     private Verifier verifier;
@@ -20,7 +20,7 @@ public class Crypto {
     private RsaCipher rsaCipher;
     private String charset;
 
-    public String encrypt(String data){
+    public String encryptAndSign(String data){
 
         String key = aesCipher.genKey();
         String salt = aesCipher.genSalt();
@@ -28,28 +28,28 @@ public class Crypto {
         String keyRsa = rsaCipher.encrypt(key, charset);
         String saltRsa = rsaCipher.encrypt(salt, charset);
 
-        Packet spec = new Packet(dataEncrypted, keyRsa, saltRsa);
-        String msg = PacketSerializer.serializeForSign(spec);
+        Message msg = new Message(dataEncrypted, keyRsa, saltRsa);
+        String msg4Sign = MessageFormat.formatToSign(msg);
 
-        String sign = signer.sign(msg, Constant.SIGN_TYPE_RSA2, charset);
+        String sign = signer.sign(msg4Sign, Constant.SIGN_TYPE_RSA2, charset);
 
-        spec.setSign(sign);
-        return PacketSerializer.serialize(spec);
+        msg.setSign(sign);
+        return MessageFormat.formatToJson(msg);
     }
 
-    public String decrypt(String data){
-        Packet spec = PacketSerializer.deserialize(data);
+    public String decryptAfterVerify(String data){
+        Message msg = MessageFormat.parseFromJson(data);
 
-        String signMaterial = PacketSerializer.serializeForSign(spec);
-        boolean verify = verifier.verify(signMaterial, spec.getSign(), charset);
+        String signMaterial = MessageFormat.formatToSign(msg);
+        boolean verify = verifier.verify(signMaterial, msg.getSign(), charset);
 
         if(!verify){
             throw new CryptoException("报文验签失败");
         }
 
-        String key = rsaCipher.decrypt(spec.getKey(), charset);
-        String salt = rsaCipher.decrypt(spec.getSalt(), charset);
-        String result = aesCipher.decrypt(spec.getData(), key, salt, charset);
+        String key = rsaCipher.decrypt(msg.getKey(), charset);
+        String salt = rsaCipher.decrypt(msg.getSalt(), charset);
+        String result = aesCipher.decrypt(msg.getData(), key, salt, charset);
         return result;
     }
 

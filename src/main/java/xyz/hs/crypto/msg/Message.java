@@ -4,19 +4,19 @@ package xyz.hs.crypto.msg;
  * @author huangsui
  * Created on 2019/8/23
  */
-public class Packet {
+public class Message {
     private String data;
     private String key;
     private String salt;
     private String sign;
 
-    public Packet(String data, String key, String salt) {
+    public Message(String data, String key, String salt) {
         this.data = data;
         this.key = key;
         this.salt = salt;
     }
 
-    public Packet(String data, String key, String salt, String sign) {
+    public Message(String data, String key, String salt, String sign) {
         this.data = data;
         this.key = key;
         this.salt = salt;

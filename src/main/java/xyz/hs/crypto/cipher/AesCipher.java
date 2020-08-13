@@ -1,16 +1,17 @@
 package xyz.hs.crypto.cipher;
 
 import com.google.common.io.BaseEncoding;
-import xyz.hs.crypto.CryptoException;
-import xyz.hs.crypto.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import xyz.hs.crypto.CryptoException;
+import xyz.hs.crypto.util.StringUtil;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
 
@@ -26,38 +27,38 @@ public class AesCipher {
     private static final String AES_CBC_PCK5_ALGORITHM = "AES/CBC/PKCS5Padding";
     private final String AES_ALGORITHM = "AES";
 
-    public String genSalt(){
+    public String genSalt() {
         return reborn(String.valueOf(System.currentTimeMillis()), 16);
     }
 
-    public String genKey(){
-        return reborn(String.valueOf(System.currentTimeMillis()+new Random().nextInt()), 6);
+    public String genKey() {
+        return reborn(String.valueOf(System.currentTimeMillis() + new Random().nextInt()), 6);
     }
 
-    private String reborn(String str, int neededLength){
+    private String reborn(String str, int neededLength) {
         int len = str.length();
-        if(len>=neededLength){
+        if (len >= neededLength) {
             return str.substring(0, neededLength);
-        }else {
+        } else {
             int count = neededLength - len;
             StringBuilder sb = new StringBuilder();
-            while (count>0){
+            while (count > 0) {
                 sb.append("0");
                 count--;
             }
-            return str+sb.toString();
+            return str + sb.toString();
         }
     }
 
     public String encrypt(String content, String key, String salt, String charset) {
         try {
-            byte[] contentBytes = StringUtil.isNullOrEmpty(charset)?content.getBytes():content.getBytes(charset);
+            byte[] contentBytes = StringUtil.isNullOrEmpty(charset) ? content.getBytes() : content.getBytes(charset);
             Cipher cipher = Cipher.getInstance(AES_CBC_PCK5_ALGORITHM);
             IvParameterSpec iv = new IvParameterSpec(salt.getBytes());// 使用CBC模式，需要一个向量iv，可增加加密算法的强度
             cipher.init(Cipher.ENCRYPT_MODE, genSecretKey(key), iv);
             byte[] encryptBytes = cipher.doFinal(contentBytes);
             return BaseEncoding.base64().encode(encryptBytes);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new CryptoException(e);
         }
     }
@@ -70,13 +71,13 @@ public class AesCipher {
             IvParameterSpec iv = new IvParameterSpec(salt.getBytes());// 使用CBC模式，需要一个向量iv，可增加加密算法的强度
             cipher.init(Cipher.DECRYPT_MODE, genSecretKey(key), iv);
             byte[] encryptBytes = cipher.doFinal(contentBytes);
-            return StringUtil.isNullOrEmpty(charset)?new String(encryptBytes):new String(encryptBytes, charset);
+            return StringUtil.isNullOrEmpty(charset) ? new String(encryptBytes) : new String(encryptBytes, charset);
         } catch (Exception e) {
             throw new CryptoException(e);
         }
     }
 
-    private SecretKey genSecretKey(String password) throws Exception {
+    private SecretKey genSecretKey(String password) throws NoSuchAlgorithmException {
         SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
         random.setSeed(password.getBytes());
         KeyGenerator keygen = KeyGenerator.getInstance(AES_ALGORITHM);
@@ -84,7 +85,7 @@ public class AesCipher {
         return keygen.generateKey();
     }
 
-    private SecretKey genSecretKey2(String password) throws Exception {
+    private SecretKey genSecretKey2(String password) {
         byte[] raw = password.getBytes();
         SecretKeySpec skeySpec = new SecretKeySpec(raw, AES_ALGORITHM);
         return skeySpec;
