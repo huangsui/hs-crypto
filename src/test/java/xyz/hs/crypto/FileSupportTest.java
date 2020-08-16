@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * @Author: huangsui@yunrong.cn
+ * @Author: huangsui
  * @Date: 2019/6/21 20:32
  * @Description:
  */

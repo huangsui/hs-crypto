@@ -8,7 +8,7 @@ import xyz.hs.crypto.key.PrivateKeyManager;
 import java.security.PrivateKey;
 
 /**
- * @author huangsui@yunrong.cn
+ * @author huangsui
  * Created on 2019/8/22
  */
 public class PrivateKeyManagerTests {

@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author huangsui@yunrong.cn
+ * @author huangsui
  * Created on 2019/8/22
  */
 public class SimpleCryptorTests {
@@ -26,6 +26,8 @@ public class SimpleCryptorTests {
         logger.info("验签解密结果：{}", data);
     }
 
+
+
     @Test
     public void test1(){
 
@@ -34,18 +36,21 @@ public class SimpleCryptorTests {
         //接收方B
         SimpleCryptor cryptoB = CryptorFactory.create("/cert/a.cer", "/cert/b.pfx", "1234");
 
-        //加密签名
-        String data = "如何写一个使用证书加密签名的工具包";
-        long start = System.currentTimeMillis();
-        String msg = cryptoB.encryptAndSign(data);
-        logger.info("加密签名总耗时：{} ms", (System.currentTimeMillis()-start));
-        logger.info("加密签名结果：{}", msg);
+        for (int i = 0; i < 10; i++) {
+            //加密签名
+            String data = "如何写一个使用证书加密签名的工具包";
+            long start = System.currentTimeMillis();
+            String msg = cryptoB.encryptAndSign(data);
+            logger.info("加密签名总耗时：{} ms", (System.currentTimeMillis()-start));
+            logger.info("加密签名结果：{}", msg);
 
-        //验签解密
-        start = System.currentTimeMillis();
-        data = cryptoA.decryptAfterVerify(msg);
-        logger.info("验签解密总耗时：{} ms", (System.currentTimeMillis()-start));
-        logger.info("验签解密结果：{}", data);
+            //验签解密
+            start = System.currentTimeMillis();
+            data = cryptoA.decryptAfterVerify(msg);
+            logger.info("验签解密总耗时：{} ms", (System.currentTimeMillis()-start));
+            logger.info("验签解密结果：{}", data);
+        }
+
 
     }
 

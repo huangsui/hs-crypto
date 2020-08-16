@@ -8,7 +8,7 @@ import xyz.hs.crypto.key.PublicKeyManager;
 import java.security.PublicKey;
 
 /**
- * @author huangsui@yunrong.cn
+ * @author huangsui
  * Created on 2019/8/22
  */
 public class PublicKeyManagerTests {

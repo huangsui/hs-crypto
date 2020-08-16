@@ -8,7 +8,7 @@ import xyz.hs.crypto.key.PrivateKeyManager;
 import xyz.hs.crypto.key.PublicKeyManager;
 
 /**
- * @author huangsui@yunrong.cn
+ * @author huangsui
  * Created on 2019/8/26
  */
 public class RsaCipherTests {

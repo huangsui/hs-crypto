@@ -5,7 +5,7 @@ import xyz.hs.crypto.key.PrivateKeyManager;
 import xyz.hs.crypto.key.PublicKeyManager;
 
 /**
- * @author huangsui@yunrong.cn
+ * @author huangsui
  * Created on 2019/9/29
  */
 public class MessageFileTest {

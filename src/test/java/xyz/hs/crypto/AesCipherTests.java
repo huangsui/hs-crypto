@@ -8,7 +8,7 @@ import xyz.hs.crypto.cipher.AesCipher;
 import java.util.Random;
 
 /**
- * @Author: huangsui@yunrong.cn
+ * @Author: huangsui
  * @Date: 2019/8/21 18:54
  * @Description:
  */
