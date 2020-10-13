@@ -13,7 +13,7 @@
         <java.version>1.7</java.version>
         <slf4j.version>1.7.26</slf4j.version>
         <gson.version>2.8.5</gson.version>
-        <junit.versin>4.12</junit.versin>
+        <junit.versin>4.13.1</junit.versin>
         <guava.version>19.0</guava.version>
     </properties>
 
